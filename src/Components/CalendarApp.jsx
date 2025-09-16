@@ -4,7 +4,7 @@ const CalendarApp = () => {
       <div className="calendar">
         <h1 className="heading">Calendar</h1>
         <div className="navigate-date">
-          <h2 className="month">September</h2>
+          <h2 className="month">September,</h2>
           <h2 className="year">2025</h2>
           <div className="buttons">
             <i className="bx bx-chevron-left"></i>
@@ -12,13 +12,13 @@ const CalendarApp = () => {
           </div>
         </div>
         <div className="weekdays">
-          <span>Sunday</span>
-          <span>Monday</span>
-          <span>Tuesday</span>
-          <span>Wednesday</span>
-          <span>Thursday</span>
-          <span>Friday</span>
-          <span>Saturday</span>
+          <span>Sun</span>
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
         </div>
         <div className="days">
           <span>1</span>
@@ -35,7 +35,7 @@ const CalendarApp = () => {
           <span>12</span>
           <span>13</span>
           <span>14</span>
-          <span>15</span>
+          <span className="current-day">15</span>
           <span>16</span>
           <span>17</span>
           <span>18</span>
@@ -69,7 +69,7 @@ const CalendarApp = () => {
         </div>
         <div className="event">
           <div className="event-date-wrapper">
-            <div className="event-date">September 11, 2025</div>
+            <div className="event-date">Sept 15, 2025</div>
             <div className="event-time">09:00</div>
           </div>
           <div className="event-text">Doctor's appointment</div>
