@@ -32,6 +32,9 @@ const CalendarApp = () => {
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear())
   const [selectedDate, setSelectedDate] = useState(currentDate)
   const [showEventPopup, setShowEventPopup] = useState(false)
+  const [events, setEvents] = useState([])
+  const [eventTime, setEventTime] = useState({hours : "00", minutes : "00"})
+  const [eventText, setEventText] = useState("")
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay()
@@ -56,6 +59,8 @@ const CalendarApp = () => {
     if (clickedDate >= today || isSameDay(clickedDate, today)) {
       setSelectedDate(clickedDate)
       setShowEventPopup(true)
+      setEventTime({hours : "00", minutes : "00"})
+      setEventText("")
     }
   }
 
@@ -65,6 +70,19 @@ const CalendarApp = () => {
       date1.getMonth() === date2.getMonth() &&
       date1.getDate() === date2.getDate() 
     )
+  }
+
+  const handleEventSubmit = () => {
+    const newEvent = {
+      date: selectedDate,
+      time: `${eventTime.hours.padStart(2, "0")}:${eventTime.minutes.padStart(2, "0")}`,
+      text: eventText
+    }
+
+    setEvents([... events, newEvent])
+    setEventTime({hours : "00", minutes : "00"})
+    setEventText("")
+    setShowEventPopup(false)
   }
 
   return (
@@ -110,10 +128,18 @@ const CalendarApp = () => {
           <div className="event-popup">
             <div className="time-input">
               <div className="event-popup-time">Time</div>
-              <input type="number"name="hours" min={0} max={24} className="hours" />
-              <input type="number"name="minutes" min={0} max={60} className="minutes" />
+              <input type="number"name="hours" min={0} max={24} className="hours" value={eventTime.hours} onChange={(e) => setEventTime({...eventTime, hours:e.target.value})} />
+              <input type="number"name="minutes" min={0} max={60} className="minutes" value={eventTime.minutes} onChange={(e) => setEventTime({...eventTime, minutes:e.target.value})} />
             </div>
-            <textarea placeholder="Enter Event Text (Maximum 60 characters)"></textarea>
+            <textarea 
+              placeholder="Enter Event Text (Maximum 60 characters)" 
+              value={eventText} 
+              onChange={(e) => {
+                if(e.target.value.length <= 60) {
+                  setEventText(e.target.value)
+                }
+              }}
+            ></textarea>
             <button className="event-popup-btn">Add Event</button>
             <button className="close-event-popup" onClick={() => setShowEventPopup(false)}>
               <i className="bx bx-x"></i>
