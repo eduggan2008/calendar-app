@@ -140,23 +140,27 @@ const CalendarApp = () => {
                 }
               }}
             ></textarea>
-            <button className="event-popup-btn">Add Event</button>
+            <button className="event-popup-btn" onClick={handleEventSubmit}>Add Event</button>
             <button className="close-event-popup" onClick={() => setShowEventPopup(false)}>
               <i className="bx bx-x"></i>
             </button>
           </div>
         }
-        <div className="event">
-          <div className="event-date-wrapper">
-            <div className="event-date">Sept 15, 2025</div>
-            <div className="event-time">09:00</div>
+
+        {events.map((event, index) => (
+          <div className="event" key={index}>
+            <div className="event-date-wrapper">
+              <div className="event-date">{`${monthOfYear[event.date.getMonth()]} ${event.date.getDate()}, ${event.date.getFullYear()}`}</div>
+              <div className="event-time">{event.time}</div>
+            </div>
+            <div className="event-text">{event.text}</div>
+            <div className="event-buttons">
+              <i className="bx bxs-edit-alt"></i>
+              <i className="bx bxs-message-alt-x"></i>
+            </div>
           </div>
-          <div className="event-text">Doctor's appointment</div>
-          <div className="event-buttons">
-            <i className="bx bxs-edit-alt"></i>
-            <i className="bx bxs-message-alt-x"></i>
-          </div>
-        </div>
+        ))}
+        
       </div>
     </div>
   )
