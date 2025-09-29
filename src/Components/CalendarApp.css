@@ -113,7 +113,12 @@
   width: 60%;
   height: 100%;
   padding: 3rem 0;
+  overflow-y: auto;
   /* position: relative; */
+}
+
+.events::-webkit-scrollbar {
+  display: none;
 }
 
 .event-popup {

@@ -110,6 +110,18 @@ const CalendarApp = () => {
     setShowEventPopup(true)
   }
 
+  const handleDeleteEvent = (eventId) => {
+    const updatedEvents = events.filter((event) => event.id !== eventId)
+
+    setEvents(updatedEvents)
+  }
+
+  const handleTimeChange = (e) => {
+    const {name, value} = e.target
+
+    setEventTime((prevTime) => ({...prevTime, [name]: value.padStart(2, "0")}))
+  }
+
   return (
     <div className="calendar-app">
       <div className="calendar">
@@ -153,8 +165,23 @@ const CalendarApp = () => {
           <div className="event-popup">
             <div className="time-input">
               <div className="event-popup-time">Time</div>
-              <input type="number"name="hours" min={0} max={24} className="hours" value={eventTime.hours} onChange={(e) => setEventTime({...eventTime, hours:e.target.value})} />
-              <input type="number"name="minutes" min={0} max={60} className="minutes" value={eventTime.minutes} onChange={(e) => setEventTime({...eventTime, minutes:e.target.value})} />
+              <input 
+                type="number"name="hours" 
+                min={0} 
+                max={24} 
+                className="hours" 
+                value={eventTime.hours} 
+                onChange={handleTimeChange} 
+              />
+              <input 
+                type="number" 
+                name="minutes" 
+                min={0} 
+                max={60} 
+                className="minutes" 
+                value={eventTime.minutes} 
+                onChange={handleTimeChange}
+               />
             </div>
             <textarea 
               placeholder="Enter Event Text (Maximum 60 characters)" 
@@ -183,7 +210,7 @@ const CalendarApp = () => {
             <div className="event-text">{event.text}</div>
             <div className="event-buttons">
               <i className="bx bxs-edit-alt" onClick={() => handleEditEvent(event)}></i>
-              <i className="bx bxs-message-alt-x"></i>
+              <i className="bx bxs-message-alt-x" onClick={() => handleDeleteEvent(event.id)}></i>
             </div>
           </div>
         ))}
