@@ -17,7 +17,14 @@ html {
   height: 100vh;
   background-color: #2c3542;
   display: grid;
+  overflow: hidden;
   place-items: center;
   perspective: 100rem;
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 55%;
+  }
 }
 
